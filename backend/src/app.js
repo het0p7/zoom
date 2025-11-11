@@ -10,14 +10,17 @@ import cors from "cors";
 const port = 8000;
 
  const app = express();
+ const server = createServer(app);
+ const io = new Server(server); 
 
+ app.set("port",(process.env.PORT || 8000))
  app.get("/home"  , (req,res)=>{
     return res.json({"hello" : "world"})
  }); 
 
  const start = async ()=>{
     
-    app.listen(port, ()=>{
+    server.listen(app.get("port"), ()=>{
         console.log("listening on port 8000");
     })
  }
