@@ -1,11 +1,14 @@
 import express from "express";
 import {createServer} from "node:http";
-
+import dotenv from "dotenv";
 import {Server} from "socket.io";
 
 import mongoose from "mongoose";
 
 import cors from "cors";
+
+
+const uri = process.env.MONGO_URL;
 
 const port = 8000;
 
@@ -14,12 +17,17 @@ const port = 8000;
  const io = new Server(server); 
 
  app.set("port",(process.env.PORT || 8000))
+
+
  app.get("/home"  , (req,res)=>{
     return res.json({"hello" : "world"})
  }); 
 
  const start = async ()=>{
-    
+ app.set("mongo_user")
+   const connectionDB = await mongoose.connect("mongodb+srv://hetparekh09_db_user:zerodhaclonehet@zoom.dee1isl.mongodb.net/");
+   console.log(`MONGO connected DB Host = ${connectionDB.connection.host}`);
+
     server.listen(app.get("port"), ()=>{
         console.log("listening on port 8000");
     })
